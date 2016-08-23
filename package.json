@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A simple project to test out pact js",
   "scripts": {
-    "test": "node_modules/mocha/bin/mocha --compilers js:babel-register src/.mocha.js $(find src/ -iname '*.test.js')"
+    "test": "node_modules/mocha/bin/mocha --compilers js:babel-register src/.mocha.js ./src/workItemServce.test.js"
   },
   "author": "wfalconer",
   "license": "ISC",
