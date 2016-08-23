@@ -1,13 +1,18 @@
 import * as wrapper from '@pact-foundation/pact-node';
 import path from 'path';
+import request from 'superagent';
 import {default as Pact} from 'pact';
+import chai, {expect} from 'chai';
+import chaiAsPromised from "chai-as-promised";
+
+chai.use(chaiAsPromised);
 
 describe.only('test pact', function() {
   this.timeout(15000);
   // create mock server to listen on port 1234
   const PROTOCOL = 'http';
   const MOCK_PORT = Math.floor(Math.random() * 999) + 9000;
-  // const PROVIDER_URL = `${PROTOCOL}://localhost:${MOCK_PORT}`;
+  const PROVIDER_URL = `${PROTOCOL}://localhost:${MOCK_PORT}`;
   const mockServer = wrapper.createServer({
     port: MOCK_PORT,
     log: path.resolve(process.cwd(), 'logs', 'mockserver-integration.log'),
@@ -79,12 +84,12 @@ describe.only('test pact', function() {
 
     // execute your assertions
     it('successfully verifies', () => {
-      expect(true).to.be.true;
-      // const verificationPromise = request
-      //   .get(`${PROVIDER_URL}/projects`)
-      //   .set({'Accept': 'application/json'})
-      //   .then(provider.verify);
-      // expect(verificationPromise).to.eventually.eql(JSON.stringify(EXPECTED_BODY)).notify(done);
+      // expect(true).to.be.true;
+      const verificationPromise = request
+        .get(`${PROVIDER_URL}/projects`)
+        .set({'Accept': 'application/json'})
+        .then(provider.verify);
+      expect(verificationPromise).to.eventually.eql(JSON.stringify(EXPECTED_BODY)).notify(done);
     });
   });
 });
