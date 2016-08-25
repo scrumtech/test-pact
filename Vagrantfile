@@ -19,8 +19,8 @@ Vagrant.configure(2) do |config|
     v.cpus = 2
 	  # v.gui = true
     # Allow symlinks
+    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate//vagrant", "1"]
     v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
-    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/www", "1"]
   end
 
   #ssh configuration

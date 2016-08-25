@@ -8,13 +8,14 @@ import chaiAsPromised from "chai-as-promised";
 chai.use(chaiAsPromised);
 
 describe.only('test pact', function() {
-  this.timeout(15000);
+  this.timeout(30000);
   // create mock server to listen on port 1234
   const PROTOCOL = 'http';
-  const MOCK_PORT = Math.floor(Math.random() * 999) + 9000;
+  const MOCK_PORT = 9000;
   const PROVIDER_URL = `${PROTOCOL}://localhost:${MOCK_PORT}`;
   const mockServer = wrapper.createServer({
-    port: MOCK_PORT,
+    port: 9000,
+    //host: '127.0.0.1',
     log: path.resolve(process.cwd(), 'logs', 'mockserver-integration.log'),
     dir: path.resolve(process.cwd(), 'pacts'),
     ssl: PROTOCOL === 'https',
@@ -39,7 +40,7 @@ describe.only('test pact', function() {
   });
 
   beforeEach(done => {
-    mockServer.start().then(() => {
+   mockServer.start().then(() => {
       console.log('STARTED');
       provider = Pact({consumer: `Consumer ${counter}`,
                        provider: `Provider ${counter}`,
@@ -47,14 +48,14 @@ describe.only('test pact', function() {
                        ssl: PROTOCOL === 'https'
                       });
       done();
-    });
+   });
   });
 
   afterEach((done) => {
-    mockServer.delete().then(() => {
-      counter++;
-      done();
-    });
+   mockServer.delete().then(() => {
+     counter++;
+     done();
+   });
   });
 
   context('with a single request', () => {
