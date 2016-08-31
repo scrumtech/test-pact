@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 Vagrant.configure(2) do |config|
 
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/xenial64"
 
   config.vm.synced_folder "./", "/vagrant"
 
@@ -23,11 +23,6 @@ Vagrant.configure(2) do |config|
     v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/v-root", "1"]
   end
 
-  #ssh configuration
-  config.ssh.username = "vagrant"
-  config.ssh.password = "vagrant"
-
-  config.vm.provision :shell, :path => ".vagrant-config/setup-certs.sh"
   config.vm.provision :shell, :path => ".vagrant-config/provision.sh"
   config.vm.provision :shell, privileged: false, :path => ".vagrant-config/node_install.sh"
 end
