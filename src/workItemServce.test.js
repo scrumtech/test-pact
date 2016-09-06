@@ -8,8 +8,8 @@ import chaiAsPromised from "chai-as-promised";
 chai.use(chaiAsPromised);
 wrapper.logLevel('debug');
 
-describe.only('test pact', function() {
-  this.timeout(30000);
+describe.only('test pact', (done) => {
+  // this.timeout(30000);
   // create mock server to listen on port 1234
   const PROTOCOL = 'http';
   const MOCK_PORT = 9000;
@@ -85,7 +85,7 @@ describe.only('test pact', function() {
     });
 
     // execute your assertions
-    it('successfully verifies', () => {
+    it('successfully verifies', (done) => {
       // expect(true).to.be.true;
       const verificationPromise = request
         .get(`${PROVIDER_URL}/projects`)
