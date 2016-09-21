@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+sudo apt-get update
+sudo apt-get install -y curl
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install -y nodejs
 sudo rm /usr/bin/node # Remove the other 'node' symlink (Something about packet radio)
