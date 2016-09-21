@@ -40,7 +40,8 @@ describe.only('test pact', (done) => {
     wrapper.removeAllServers();
   });
 
-  beforeEach(done => {
+  beforeEach(function(done) {
+    this.timeout(10000);
    mockServer.start().then(() => {
       console.log('STARTED');
       provider = Pact({consumer: `Consumer ${counter}`,
