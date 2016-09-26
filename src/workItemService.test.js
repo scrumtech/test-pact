@@ -6,10 +6,9 @@ import chaiAsPromised from "chai-as-promised";
 import {createWorkItem} from "./workItemService.js"
 
 chai.use(chaiAsPromised);
-wrapper.logLevel('debug');
+// wrapper.logLevel('debug');
 
-describe.only('work item service', (done) => {
-  // this.timeout(30000);
+describe('work item service', (done) => {
   // create mock server to listen on port 1234
   const PROTOCOL = 'http';
   const MOCK_PORT = 9000;
